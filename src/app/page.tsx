@@ -770,7 +770,7 @@ function CategoryCard({
             <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{category.nameEn}</p>
           </div>
         </div>
-        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
           {category.description}
         </p>
         <div className="pt-1">
