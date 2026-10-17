@@ -479,31 +479,35 @@ export default function Home() {
                   href={whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="واتساب"
                 >
                   <MessageCircle className="w-5 h-5" />
                 </a>
                 <a
                   href={`tel:${BRAND.phone}`}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="اتصال"
                 >
                   <Phone className="w-5 h-5" />
                 </a>
                 <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent flex items-center justify-center transition-colors"
-                  aria-label="إنستجرام"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent flex items-center justify-center transition-colors"
+                  href={BRAND.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="فيسبوك"
                 >
                   <Facebook className="w-5 h-5" />
+                </a>
+                <a
+                  href={BRAND.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                  aria-label="إنستجرام"
+                >
+                  <Instagram className="w-5 h-5" />
                 </a>
               </div>
             </div>
@@ -707,48 +711,58 @@ function CategoryCard({
       className="group overflow-hidden border-border/60 hover:border-accent/50 hover:shadow-xl transition-all cursor-pointer"
       onClick={onViewGallery}
     >
-      <div className="grid grid-cols-2 gap-1 h-56 sm:h-64 bg-secondary">
-        {category.images.slice(0, 4).map((img, i) => (
+      {/* Image grid: أول صورة كبيرة + 2 صور صغيرة */}
+      <div className="grid grid-cols-3 grid-rows-2 gap-1 aspect-[3/2] bg-secondary">
+        <div className="col-span-2 row-span-2 relative overflow-hidden">
+          <Image
+            src={category.images[0]}
+            alt={`${category.name} - التصميم الرئيسي`}
+            fill
+            sizes="(max-width: 640px) 66vw, 22vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            unoptimized
+          />
+          {/* شارة عدد الصور فوق الصورة */}
+          <div className="absolute top-2 right-2 z-10">
+            <span className="text-xs font-semibold bg-background/90 backdrop-blur-sm text-primary px-2.5 py-1 rounded-full shadow-sm">
+              {category.images.length} صور
+            </span>
+          </div>
+        </div>
+        {category.images.slice(1, 3).map((img, i) => (
           <div
             key={i}
-            className={cn(
-              "relative overflow-hidden",
-              i === 0 && "col-span-2 row-span-1 h-32",
-              i !== 0 && "h-32"
-            )}
+            className="relative overflow-hidden"
           >
             <Image
               src={img}
-              alt={`${category.name} - تصميم ${i + 1}`}
+              alt={`${category.name} - تصميم ${i + 2}`}
               fill
-              sizes="(max-width: 640px) 100vw, 33vw"
+              sizes="(max-width: 640px) 33vw, 11vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               unoptimized
             />
           </div>
         ))}
       </div>
-      <CardContent className="p-5">
-        <div className="flex items-start justify-between gap-3">
+      <CardContent className="p-5 space-y-3">
+        <div className="flex items-start gap-3">
+          <span className="text-2xl shrink-0">{category.icon}</span>
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-2xl">{category.icon}</span>
-              <h3 className="text-lg sm:text-xl font-bold text-primary">{category.name}</h3>
-            </div>
-            <p className="text-xs text-muted-foreground">{category.nameEn}</p>
+            <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight">
+              {category.name}
+            </h3>
+            <p className="text-xs text-muted-foreground mt-0.5">{category.nameEn}</p>
           </div>
-          <span className="text-xs font-semibold bg-accent/15 text-accent-foreground px-2.5 py-1 rounded-full shrink-0">
-            {category.images.length} صور
-          </span>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed mt-3 line-clamp-2">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
           {category.description}
         </p>
-        <div className="mt-4 flex items-center justify-between gap-2">
+        <div className="pt-1">
           <Button
             size="sm"
             variant="ghost"
-            className="gap-1 text-primary hover:bg-primary hover:text-primary-foreground"
+            className="gap-1 text-primary hover:bg-primary hover:text-primary-foreground w-full justify-center"
             onClick={(e) => {
               e.stopPropagation();
               onViewGallery();

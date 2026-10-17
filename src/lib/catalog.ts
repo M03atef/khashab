@@ -174,4 +174,6 @@ export const BRAND = {
     "خشبة براند متخصص في صناعة الأثاث الخشبي الفاخر بتصميمات تجمع بين الأصالة والحداثة. كل قطعة تخرج من ورشتنا تحمل لمسة حرفية فريدة وإتقان يدوي يضمن لها البقاء جيلاً بعد جيل.",
   address: "القاهرة، مصر",
   workingHours: "السبت - الخميس: 10 ص - 9 م",
+  facebook: "https://www.facebook.com/profile.php?id=61594437931625",
+  instagram: "https://www.instagram.com/khashaba.wood/?hl=en",
 } as const;
