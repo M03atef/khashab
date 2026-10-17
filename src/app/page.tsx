@@ -723,44 +723,45 @@ function CategoryCard({
 }) {
   return (
     <Card
-      className="group overflow-hidden border-border/60 hover:border-accent/50 hover:shadow-xl transition-all cursor-pointer h-full"
+      className="group overflow-hidden border-border/60 hover:border-accent/50 hover:shadow-xl transition-all cursor-pointer h-full flex flex-col"
       onClick={onViewGallery}
     >
-      {/* Image grid: أول صورة كبيرة + 2 صور صغيرة */}
-      <div className="grid grid-cols-3 grid-rows-2 gap-0.5 aspect-[3/2] bg-secondary">
-        <div className="col-span-2 row-span-2 relative overflow-hidden">
-          <Image
-            src={category.images[0]}
-            alt={`${category.name} - التصميم الرئيسي`}
-            fill
-            sizes="(max-width: 640px) 66vw, 22vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            unoptimized
-          />
-          {/* شارة عدد الصور فوق الصورة */}
-          <div className="absolute top-2 right-2 z-10">
-            <span className="text-[10px] sm:text-xs font-semibold bg-background/90 backdrop-blur-sm text-primary px-2 sm:px-2.5 py-1 rounded-full shadow-sm">
-              {category.images.length} صور
-            </span>
-          </div>
+      {/* تخطيط ثابت لكل الكروت: صورة كبيرة واحدة + شارة عدد الصور */}
+      <div className="relative aspect-[4/3] bg-secondary overflow-hidden shrink-0">
+        <Image
+          src={category.images[0]}
+          alt={`${category.name} - التصميم الرئيسي`}
+          fill
+          sizes="(max-width: 640px) 100vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          unoptimized
+        />
+        {/* شارة عدد الصور فوق الصورة */}
+        <div className="absolute top-2 right-2 z-10">
+          <span className="text-[10px] sm:text-xs font-semibold bg-background/90 backdrop-blur-sm text-primary px-2 sm:px-2.5 py-1 rounded-full shadow-sm">
+            {category.images.length} صور
+          </span>
         </div>
-        {category.images.slice(1, 3).map((img, i) => (
-          <div
-            key={i}
-            className="relative overflow-hidden"
-          >
-            <Image
-              src={img}
-              alt={`${category.name} - تصميم ${i + 2}`}
-              fill
-              sizes="(max-width: 640px) 33vw, 11vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              unoptimized
-            />
-          </div>
-        ))}
+        {/* معاينة مصغرة في الزاوية السفلية */}
+        <div className="absolute bottom-2 left-2 z-10 flex gap-1">
+          {category.images.slice(1, 4).map((img, i) => (
+            <div
+              key={i}
+              className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-md overflow-hidden ring-2 ring-background shadow-sm"
+            >
+              <Image
+                src={img}
+                alt={`${category.name} - معاينة ${i + 2}`}
+                fill
+                sizes="48px"
+                className="object-cover"
+                unoptimized
+              />
+            </div>
+          ))}
+        </div>
       </div>
-      <CardContent className="p-4 sm:p-5 space-y-2 sm:space-y-3">
+      <CardContent className="p-4 sm:p-5 space-y-2 sm:space-y-3 flex-1 flex flex-col">
         <div className="flex items-start gap-2 sm:gap-3">
           <span className="text-xl sm:text-2xl shrink-0">{category.icon}</span>
           <div className="flex-1 min-w-0">
@@ -773,7 +774,7 @@ function CategoryCard({
         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
           {category.description}
         </p>
-        <div className="pt-1">
+        <div className="pt-1 mt-auto">
           <Button
             size="sm"
             variant="ghost"
