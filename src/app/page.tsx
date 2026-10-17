@@ -199,64 +199,80 @@ export default function Home() {
         id="home"
         className="relative overflow-hidden wood-grain-bg border-b border-border/60"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="flex flex-col gap-6 animate-fade-up">
-              <div className="inline-flex items-center gap-2 self-start rounded-full bg-accent/15 border border-accent/30 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
-                <Sparkles className="w-4 h-4 text-accent" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* النصوص */}
+            <div className="flex flex-col gap-4 sm:gap-6 animate-fade-up order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 self-start rounded-full bg-accent/15 border border-accent/30 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold text-accent-foreground">
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" />
                 أثاث خشبي فاخر مصنوع بحب
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] text-primary">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.15] text-primary">
                 <span className="block">{BRAND.name}</span>
-                <span className="block text-accent mt-2">{BRAND.tagline}</span>
+                <span className="block text-accent mt-1 sm:mt-2">{BRAND.tagline}</span>
               </h1>
 
-              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl">
                 {BRAND.description}
               </p>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-wrap gap-2 sm:gap-3 pt-1 sm:pt-2">
                 <Button
                   size="lg"
-                  className="gap-2 text-base h-12 px-6"
+                  className="gap-2 text-sm sm:text-base h-11 sm:h-12 px-5 sm:px-6 flex-1 sm:flex-none"
                   onClick={() => scrollTo("categories")}
                 >
                   تصفح المعرض
-                  <ArrowLeft className="w-5 h-5" />
+                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="gap-2 text-base h-12 px-6 border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground"
+                    className="gap-2 text-sm sm:text-base h-11 sm:h-12 px-5 sm:px-6 w-full border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground"
                   >
-                    <MessageCircle className="w-5 h-5" />
+                    <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                     اطلب قطعتك
                   </Button>
                 </a>
               </div>
 
               {/* Trust stats */}
-              <div className="grid grid-cols-3 gap-4 pt-8 mt-2 border-t border-border/60">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-6 sm:pt-8 mt-2 border-t border-border/60">
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-primary">+{CATEGORIES.length}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground mt-1">أقسام أثاث</div>
+                  <div className="text-xl sm:text-3xl font-extrabold text-primary">+{CATEGORIES.length}</div>
+                  <div className="text-[10px] sm:text-sm text-muted-foreground mt-1">أقسام أثاث</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-primary">+{CATEGORIES.reduce((s, c) => s + c.images.length, 0)}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground mt-1">تصميم متنوع</div>
+                  <div className="text-xl sm:text-3xl font-extrabold text-primary">+{CATEGORIES.reduce((s, c) => s + c.images.length, 0)}</div>
+                  <div className="text-[10px] sm:text-sm text-muted-foreground mt-1">تصميم متنوع</div>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-primary">100%</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground mt-1">خشب طبيعي</div>
+                  <div className="text-xl sm:text-3xl font-extrabold text-primary">100%</div>
+                  <div className="text-[10px] sm:text-sm text-muted-foreground mt-1">خشب طبيعي</div>
                 </div>
               </div>
             </div>
 
-            {/* Logo + collage */}
-            <div className="relative animate-fade-up" style={{ animationDelay: "0.15s" }}>
-              <div className="relative aspect-square max-w-md mx-auto">
+            {/* اللوجو - على الموبايل صورة بسيطة، على الديسكتوب كولاج */}
+            <div className="relative animate-fade-up order-1 lg:order-2" style={{ animationDelay: "0.15s" }}>
+              {/* نسخة الموبايل: لوجو دائري بسيط */}
+              <div className="lg:hidden flex justify-center">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl ring-4 ring-background">
+                  <Image
+                    src="/khashaba-logo.png"
+                    alt="لوجو خشبة"
+                    fill
+                    sizes="(max-width: 1024px) 256px, 0px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* نسخة الديسكتوب: كولاج كامل */}
+              <div className="hidden lg:block relative aspect-square max-w-md mx-auto">
                 {/* Big logo */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl ring-8 ring-background ring-offset-4 ring-offset-accent/20">
@@ -264,30 +280,30 @@ export default function Home() {
                       src="/khashaba-logo.png"
                       alt="لوجو خشبة"
                       fill
-                      sizes="(max-width: 768px) 320px, 400px"
+                      sizes="400px"
                       className="object-cover"
                       priority
                     />
                   </div>
                 </div>
 
-                {/* Floating preview cards */}
+                {/* Floating preview cards - بس على الديسكتوب */}
                 <FloatingImageCard
                   src={CATEGORIES[0].images[0]}
                   alt={CATEGORIES[0].name}
-                  className="absolute top-2 -right-2 sm:top-4 sm:-right-4 w-28 h-28 sm:w-36 sm:h-36"
+                  className="absolute top-4 -right-4 w-36 h-36"
                   rotation={6}
                 />
                 <FloatingImageCard
                   src={CATEGORIES[5].images[0]}
                   alt={CATEGORIES[5].name}
-                  className="absolute bottom-2 -left-2 sm:bottom-4 sm:-left-4 w-28 h-28 sm:w-36 sm:h-36"
+                  className="absolute bottom-4 -left-4 w-36 h-36"
                   rotation={-6}
                 />
                 <FloatingImageCard
                   src={CATEGORIES[7].images[0]}
                   alt={CATEGORIES[7].name}
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-24 sm:w-32 sm:h-32"
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-32"
                   rotation={-3}
                 />
               </div>
@@ -384,8 +400,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Category filter pills */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {/* Category filter pills - scrollable على الموبايل */}
+          <div className="flex sm:flex-wrap justify-start sm:justify-center gap-2 mb-10 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
             <FilterPill
               active={activeCategory === "all"}
               onClick={() => setActiveCategory("all")}
@@ -450,12 +466,12 @@ export default function Home() {
 
       {/* ===== Contact / Footer ===== */}
       <footer id="contact" className="mt-auto bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
           <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-background/20">
+                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden ring-2 ring-background/20 shrink-0">
                   <Image
                     src="/khashaba-logo.png"
                     alt="خشبة"
@@ -465,13 +481,13 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex flex-col leading-tight">
-                  <span className="text-2xl font-extrabold">{BRAND.name}</span>
-                  <span className="text-xs text-primary-foreground/60 tracking-wider">
+                  <span className="text-xl sm:text-2xl font-extrabold">{BRAND.name}</span>
+                  <span className="text-[10px] sm:text-xs text-primary-foreground/70 tracking-wider">
                     {BRAND.nameEn.toUpperCase()}
                   </span>
                 </div>
               </div>
-              <p className="text-sm text-primary-foreground/75 leading-relaxed">
+              <p className="text-sm text-primary-foreground/85 leading-relaxed">
                 {BRAND.tagline}. أثاث خشبي مصنوع بإتقان وحب في مصر.
               </p>
               <div className="flex gap-2 pt-2">
@@ -479,14 +495,14 @@ export default function Home() {
                   href={whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                  className="w-11 h-11 rounded-full bg-primary-foreground/15 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="واتساب"
                 >
                   <MessageCircle className="w-5 h-5" />
                 </a>
                 <a
                   href={`tel:${BRAND.phone}`}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                  className="w-11 h-11 rounded-full bg-primary-foreground/15 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="اتصال"
                 >
                   <Phone className="w-5 h-5" />
@@ -495,7 +511,7 @@ export default function Home() {
                   href={BRAND.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                  className="w-11 h-11 rounded-full bg-primary-foreground/15 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="فيسبوك"
                 >
                   <Facebook className="w-5 h-5" />
@@ -504,7 +520,7 @@ export default function Home() {
                   href={BRAND.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                  className="w-11 h-11 rounded-full bg-primary-foreground/15 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
                   aria-label="إنستجرام"
                 >
                   <Instagram className="w-5 h-5" />
@@ -515,7 +531,7 @@ export default function Home() {
             {/* Quick links */}
             <div className="space-y-3">
               <h3 className="font-bold text-base mb-2">روابط سريعة</h3>
-              <ul className="space-y-2 text-sm text-primary-foreground/75">
+              <ul className="space-y-2.5 text-sm text-primary-foreground/85">
                 {navItems.map((item) => (
                   <li key={item.id}>
                     <button
@@ -532,7 +548,7 @@ export default function Home() {
             {/* Categories */}
             <div className="space-y-3">
               <h3 className="font-bold text-base mb-2">الأقسام</h3>
-              <ul className="space-y-2 text-sm text-primary-foreground/75">
+              <ul className="space-y-2.5 text-sm text-primary-foreground/85">
                 {CATEGORIES.slice(0, 5).map((cat) => (
                   <li key={cat.id}>
                     <button
@@ -552,7 +568,7 @@ export default function Home() {
             {/* Contact */}
             <div className="space-y-3">
               <h3 className="font-bold text-base mb-2">معلومات التواصل</h3>
-              <ul className="space-y-3 text-sm text-primary-foreground/75">
+              <ul className="space-y-3 text-sm text-primary-foreground/85">
                 <li className="flex items-start gap-3">
                   <Phone className="w-5 h-5 mt-0.5 text-accent shrink-0" />
                   <a
@@ -587,7 +603,7 @@ export default function Home() {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-10 pt-6 border-t border-primary-foreground/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-primary-foreground/60">
+          <div className="mt-8 sm:mt-10 pt-6 border-t border-primary-foreground/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-primary-foreground/75">
             <p>
               © {new Date().getFullYear()} {BRAND.name}. جميع الحقوق محفوظة.
             </p>
@@ -598,16 +614,15 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp button */}
+      {/* Floating WhatsApp button - صغير ومكانه بعيد عن المحتوى */}
       <a
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 left-5 z-50 w-14 h-14 rounded-full bg-accent text-accent-foreground shadow-2xl flex items-center justify-center hover:scale-110 transition-transform"
+        className="fixed bottom-3 left-3 z-40 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-accent text-accent-foreground shadow-xl flex items-center justify-center hover:scale-110 transition-transform"
         aria-label="تواصل واتساب"
       >
-        <MessageCircle className="w-7 h-7" />
-        <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-30" />
+        <MessageCircle className="w-5 h-5 sm:w-7 sm:h-7" />
       </a>
 
       {/* Lightbox */}
@@ -708,11 +723,11 @@ function CategoryCard({
 }) {
   return (
     <Card
-      className="group overflow-hidden border-border/60 hover:border-accent/50 hover:shadow-xl transition-all cursor-pointer"
+      className="group overflow-hidden border-border/60 hover:border-accent/50 hover:shadow-xl transition-all cursor-pointer h-full"
       onClick={onViewGallery}
     >
       {/* Image grid: أول صورة كبيرة + 2 صور صغيرة */}
-      <div className="grid grid-cols-3 grid-rows-2 gap-1 aspect-[3/2] bg-secondary">
+      <div className="grid grid-cols-3 grid-rows-2 gap-0.5 aspect-[3/2] bg-secondary">
         <div className="col-span-2 row-span-2 relative overflow-hidden">
           <Image
             src={category.images[0]}
@@ -724,7 +739,7 @@ function CategoryCard({
           />
           {/* شارة عدد الصور فوق الصورة */}
           <div className="absolute top-2 right-2 z-10">
-            <span className="text-xs font-semibold bg-background/90 backdrop-blur-sm text-primary px-2.5 py-1 rounded-full shadow-sm">
+            <span className="text-[10px] sm:text-xs font-semibold bg-background/90 backdrop-blur-sm text-primary px-2 sm:px-2.5 py-1 rounded-full shadow-sm">
               {category.images.length} صور
             </span>
           </div>
@@ -745,24 +760,24 @@ function CategoryCard({
           </div>
         ))}
       </div>
-      <CardContent className="p-5 space-y-3">
-        <div className="flex items-start gap-3">
-          <span className="text-2xl shrink-0">{category.icon}</span>
+      <CardContent className="p-4 sm:p-5 space-y-2 sm:space-y-3">
+        <div className="flex items-start gap-2 sm:gap-3">
+          <span className="text-xl sm:text-2xl shrink-0">{category.icon}</span>
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight">
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-primary leading-tight">
               {category.name}
             </h3>
-            <p className="text-xs text-muted-foreground mt-0.5">{category.nameEn}</p>
+            <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{category.nameEn}</p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">
           {category.description}
         </p>
         <div className="pt-1">
           <Button
             size="sm"
             variant="ghost"
-            className="gap-1 text-primary hover:bg-primary hover:text-primary-foreground w-full justify-center"
+            className="gap-1 text-primary hover:bg-primary hover:text-primary-foreground w-full justify-center h-9 sm:h-10"
             onClick={(e) => {
               e.stopPropagation();
               onViewGallery();
@@ -790,7 +805,7 @@ function FilterPill({
     <button
       onClick={onClick}
       className={cn(
-        "px-4 py-2 rounded-full text-sm font-semibold transition-all border",
+        "px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all border whitespace-nowrap min-h-9",
         active
           ? "bg-primary text-primary-foreground border-primary shadow-md"
           : "bg-background text-foreground/80 border-border hover:border-accent/50 hover:text-primary"
@@ -809,14 +824,14 @@ function CategoryGallery({
   onImageClick: (src: string, alt: string) => void;
 }) {
   return (
-    <div className="space-y-5">
-      <div className="flex items-end justify-between gap-4 border-b border-border pb-3">
-        <div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-primary flex items-center gap-2">
-            <span className="text-3xl">{category.icon}</span>
-            {category.name}
+    <div className="space-y-4 sm:space-y-5">
+      <div className="flex items-start justify-between gap-3 border-b border-border pb-3">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-xl sm:text-3xl font-extrabold text-primary flex items-center gap-2">
+            <span className="text-2xl sm:text-3xl shrink-0">{category.icon}</span>
+            <span className="truncate">{category.name}</span>
           </h3>
-          <p className="text-sm text-muted-foreground mt-1">{category.nameEn}</p>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">{category.nameEn}</p>
         </div>
         <a
           href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
@@ -824,28 +839,30 @@ function CategoryGallery({
           )}`}
           target="_blank"
           rel="noopener noreferrer"
+          className="shrink-0"
         >
           <Button
             size="sm"
             variant="outline"
-            className="gap-1 border-accent/40 text-accent hover:bg-accent hover:text-accent-foreground"
+            className="gap-1 border-accent/40 text-accent hover:bg-accent hover:text-accent-foreground h-9 px-3"
           >
             <MessageCircle className="w-4 h-4" />
             اطلب زيها
           </Button>
         </a>
       </div>
-      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+      <p className="text-xs sm:text-base text-muted-foreground leading-relaxed">
         {category.description}
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4">
+      {/* على الموبايل: عمودين، على الديسكتوب: 3 أعمدة مع الصورة الأولى كبيرة */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
         {category.images.map((img, i) => (
           <button
             key={i}
             onClick={() => onImageClick(img, `${category.name} - تصميم ${i + 1}`)}
             className={cn(
-              "group relative overflow-hidden rounded-xl bg-secondary aspect-[3/4] sm:aspect-[4/5] image-hover-zoom ring-1 ring-border hover:ring-2 hover:ring-accent transition-all",
-              i === 0 && "sm:col-span-2 sm:row-span-2 sm:aspect-square"
+              "group relative overflow-hidden rounded-lg sm:rounded-xl bg-secondary aspect-square image-hover-zoom ring-1 ring-border hover:ring-2 hover:ring-accent transition-all",
+              i === 0 && "sm:col-span-2 sm:row-span-2"
             )}
           >
             <Image
@@ -856,8 +873,8 @@ function CategoryGallery({
               className="object-cover"
               unoptimized
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-              <span className="text-xs sm:text-sm font-semibold text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2 sm:p-3">
+              <span className="text-[10px] sm:text-sm font-semibold text-white">
                 {category.name} #{i + 1}
               </span>
             </div>
